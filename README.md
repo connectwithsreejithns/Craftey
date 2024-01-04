@@ -3,10 +3,12 @@ Author : SREEJITH N S
 Contact : connectwithsreejithms@gmail.com
 ------------------------------------------------------------------
 It is a store application to purchase and sell HandiCraft products.
+
 ------------------------------------------------------------------
 TYPES OF USERS
 1.CUSTOMER
 2.ADMIN
+
 ------------------------------------------------------------------
 TECHNOLOGIES USED
 1.JAVA
