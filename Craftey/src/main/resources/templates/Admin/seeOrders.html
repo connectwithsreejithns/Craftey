@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Craftey || Admin Home</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm navbar-light"
+		style="background-color: #e3f2fd;">
+		<ul class="navbar-nav container">
+
+			<li class="nav-item"><a class="nav-link font-weight-bold"
+				href="/admin/home" style="color: black;">Craftey. ADMIN PANEL</a></li>
+			<li class="nav-item"><a class="nav-link font-weight-bold"
+				href="/admin/addProduct">Add Product</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/home">List of
+					Product</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/orders">See
+					Orders</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/orders/orderHistory">Order
+					History</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" th:href="@{/user/logout}">Logout</a></li>
+		</ul>
+	</nav>
+	<hr>
+	<h3 class="text-center">View all Orders</h3>
+	<hr>
+	<div class="container">
+		<div class="col-12">
+
+			<div th:each="cart : ${cart}">
+			
+				<div th:if="${cart.status eq 'Ordered'}">
+					Customer Name : <span style="color: red">[[*{cart.user.username}]]</span><br>
+					Customer Address :<span style="color: red">[[*{cart.user.address.houseName}]]<br>[[*{cart.user.address.street}]]<br>[[*{cart.user.address.city}]]<br>PIN
+						: [[*{cart.user.address.pinCode}]]
+					</span>
+					<hr>
+
+					Customer Phone : <span style="color: red">[[*{cart.user.address.phone}]]</span>
+					<hr>
+					Product Name : <span style="color: red">[[*{cart.product.name}]]</span>
+					X [[*{cart.quantity}]] Piece<br>
+					<hr>
+					Amount : <span style="color: red">[[*{cart.product.price*cart.quantity}]]
+						Rupees</span>
+					<hr>
+					<a th:href="@{/customer/order/delivered/{id}(id=${cart.id})}"
+						style="text-decoration: none;">
+						<button type="button" class="btn btn-secondary btn-lg btn-block">Delivered</button>
+					</a> <br> <br> <br>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

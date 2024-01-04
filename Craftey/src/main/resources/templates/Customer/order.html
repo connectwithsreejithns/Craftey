@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Craftey.</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--jQuery library-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!--Latest compiled and minified JavaScript-->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="/css/productPage.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+body {
+	text-align: center;
+	padding: 40px 0;
+	background: #EBF0F5;
+}
+
+h1 {
+	color: #88B04B;
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+p {
+	color: #404F5E;
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font-size: 20px;
+	margin: 0;
+}
+
+i {
+	color: #9ABC66;
+	font-size: 100px;
+	line-height: 200px;
+	margin-left: -15px;
+}
+
+.card {
+	background: white;
+	padding: 60px;
+	border-radius: 4px;
+	box-shadow: 0 2px 3px #C8D0D8;
+	display: inline-block;
+	margin: 0 auto;
+}
+</style>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="cart.html"><span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+					<li th:each="user: ${user}"><a th:href="@{/customer/address}"><span
+							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a></li>
+					<li><a th:href="@{/user/logout}"><span
+							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav><br><br>
+	<div class="card">
+		<div
+			style="border-radius: 200px; height: 200px; width: 200px; background: #F8FAF5; margin: 0 auto;">
+			<i class="checkmark">✓</i>
+		</div>
+		<h1>Success</h1>
+		<p>
+			We received your purchase request<br /> You will Recieve the
+			delivery within 3 days !
+		</p><br>
+		<a th:href="@{/customer/home}"><span
+							class="glyphicon glyphicon-log-in"></span> Go Back to Shopping... </a></li>
+
+	</div>
+</body>
+</html>

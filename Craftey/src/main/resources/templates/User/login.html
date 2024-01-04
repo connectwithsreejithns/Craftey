@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Craftey.</title>
+<link href="/css/loginSignup.css" rel="stylesheet" type="text/css" />
+<!-- Fontawesome CDN Link -->
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--jQuery library-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!--Latest compiled and minified JavaScript-->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/customer/cart}"> About </a></li>
+					
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+
+	<div class="login-container">
+		<input type="checkbox" id="flip">
+		<div class="cover">
+			<div class="front">
+				<img src="/img/login.jpg" alt="">
+				<div class="text">
+					<span class="text-1">Login now to Shop <br> the best
+						Handicrafts.
+					</span> <span class="text-2">Let's get connected</span>
+				</div>
+			</div>
+			<div class="back">
+				<img class="backImg" src="/img/login.jpg" alt="fgdfght">
+				<div class="text">
+					<span class="text">Login now to Shop <br> the best
+						Handicrafts.
+					</span> <span class="text">Let's get connected</span>
+				</div>
+			</div>
+		</div>
+		<div class="forms">
+			<div class="form-content">
+				<div class="login-form">
+					<div class="title">Login</div>
+					<form action="/user/login" method="post" th:object="${user}">
+						<div class="input-boxes">
+							<div class="input-box">
+								<i class="fas fa-envelope"></i> <input type="text" id="email"
+									name="email" th:field="*{email}" placeholder="Enter your email"
+									required>
+							</div>
+							<div class="input-box">
+								<i class="fas fa-lock"></i> <input type="password" id="password"
+									name="password" th:field="*{password}"
+									placeholder="Enter your password" required>
+							</div>
+							<div class="text">
+								<a href="#forgotpass"></a>
+							</div>
+							<div class="button input-box">
+								<input type="submit" value="Login">
+							</div>
+							<div class="text sign-up-text">
+								Don't have an account? <label for="flip">Sigup now</label>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="signup-form">
+					<div class="title">Signup</div>
+					<form action="/user/signup" method="post" th:object="${user}">
+						<div class="input-boxes">
+							<div class="input-box">
+								<i class="fas fa-user"></i> <input type="text" id="username"
+									name="username" th:field="*{username}"
+									placeholder="Enter your name" required>
+							</div>
+							<div class="input-box">
+								<i class="fas fa-envelope"></i> <input type="text" id="email"
+									name="email" th:field="*{email}" placeholder="Enter your email"
+									required>
+							</div>
+							<div class="input-box">
+								<i class="fas fa-lock"></i> <input type="password" id="confirmPassword"
+									name="confirmPassword" th:field="*{confirmPassword}" placeholder="Enter your password" required>
+							</div>
+							<div class="input-box">
+								<i class="fas fa-lock"></i> <input type="password" id="password"
+									name="password" th:field="*{password}"
+									placeholder="Confirm your password" required>
+							</div>
+							<div class="button input-box">
+								<input type="submit" value="Sign Up">
+							</div>
+							<div class="text sign-up-text">
+								Already have an account? <label for="flip">Login now</label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

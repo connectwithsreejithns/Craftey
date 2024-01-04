@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Craftey.</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--jQuery library-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="/css/cart.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/customer/cart}"><span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+					<li><a href="settings.html"><span
+							class="glyphicon glyphicon-user"></span> Settings </a></li>
+					<li><a href="logout.html"><span
+							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+
+
+	<div class="container padding-bottom-3x mb-1">
+
+		<div class="table-responsive shopping-cart">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Products</th>
+						<th class="text-center">Quantity</th>
+						<th class="text-center">Rate</th>
+						<th class="text-center">Subtotal</th>
+
+					</tr>
+				</thead>
+				<tbody th:each="cart:${cart}">
+
+
+					<tr>
+						<td>
+							<div class="product-item">
+								<a class="product-thumb" href="#"><img
+									th:src="|data:image/jpeg;base64,${cart.product.image}|"
+									style="width: 100px;" alt="Product"></a>
+								<div class="product-info">
+									<h4 class="product-title">
+										<a href="#">[[*{cart.product.name}]]</a>
+									</h4>
+								</div>
+							</div>
+						</td>
+						<td class="text-center">
+							<div class="count-input">
+							
+								<a th:href="@{/customer/cart/deleteFromCart/{id}(id=${cart.product.id})}">
+								<button type="button" class="btn btn-outline-danger">-</button></a>
+								[[*{cart.quantity}]]
+								<a th:href="@{/customer/cart/addToCart/{id}(id=${cart.product.id})}">
+								<button type="button" class="btn btn-outline-success">+</button></a>
+								<!-- <a href="#">-</a>
+								
+									<div>[[*{cart.quantity}]]</div>
+									<a href="#">+</a> -->
+							</div>
+						</td>
+						<td class="text-center text-lg text-medium">[[*{cart.product.price}]]</td>
+						<td class="text-center text-lg text-medium">[[*{cart.product.price*cart.quantity}]]</td>
+						<td class="text-center"><a class="remove-from-cart" href="#"
+							data-toggle="tooltip" title="" data-original-title="Remove item"><i
+								class="fa fa-trash"></i></a></td>
+					</tr>
+
+
+
+
+
+
+				</tbody>
+			</table>
+		</div>
+		<div class="shopping-cart-footer">
+
+			<div class="column text-lg">
+				Subtotal: <span class="text-medium">$289.68</span>
+			</div>
+		</div>
+		<div class="shopping-cart-footer">
+			<div class="column">
+				<a class="btn btn-outline-secondary" href=""><i
+					class="icon-arrow-left"></i>&nbsp;Back to Shopping</a>
+			</div>
+			<div class="column">
+				<a class="btn btn-success" th:href="@{/customer/order/place-order}">Checkout</a>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+</body>
+</html>

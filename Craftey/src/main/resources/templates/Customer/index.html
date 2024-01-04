@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Craftey.</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--jQuery library-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!--Latest compiled and minified JavaScript-->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="/css/productPage.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="cart.html"><span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+					<li th:each="user: ${user}">
+					<a th:href="@{/customer/address}"><span
+							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a>
+					</li>
+					<li><a th:href="@{/user/logout}"><span
+							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container content">
+		<!-- Jumbotron Header -->
+		<div class="jumbotron home-spacer" id="products-jumbotron">
+			<h1>Welcome to the Craftey!</h1>
+			<p>Join a vibrant community of artists, artisans, and craftsmen
+				who appreciate and celebrate the value of handmade creations,
+				fostering connections and collaborations.</p>
+
+		</div>
+		<hr>
+
+
+		<div class="row text-center" id="cameras">
+			<div th:each="product: ${products}"
+				class="col-md-3 col-sm-6 home-feature">
+				<div class="thumbnail">
+					<a th:href="@{/customer/productView/{id}(id=${product.id})}"> <img
+						th:src="|data:image/jpeg;base64,${product.image}|"
+						style="width: 200px; height: 200px;" /></a>
+					<div class="caption">
+						<hr>
+						<h3>[[*{product.name}]]</h3>
+						<p>[[*{product.desc}]]</p>
+						<p>
+							<b>&#8377;[[*{product.price}]]</b>
+						</p>
+						<hr>
+						<div>
+							<a th:href="@{/customer/cart/addToCart/{id}(id=${product.id})}"> 
+								<button class="cart-btn" type="button">Add To
+									Cart</button></a>
+							<a th:href="@{/customer/productView/{id}(id=${product.id})}"> 
+								<button class="cart-btnn" type="submit">Buy Now</button></a>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<footer>
+		<div class="container">
+			<center>
+				<p>Copyright © Craftey.</p>
+			</center>
+		</div>
+	</footer>
+
+</body>
+
+</html>

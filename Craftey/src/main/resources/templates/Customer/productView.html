@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Craftey.</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--jQuery library-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!--Latest compiled and minified JavaScript-->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="index.css" rel="stylesheet" type="text/css" />
+<link href="/css/productView.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/customer/cart}"><span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+					<li><a href="settings.html"><span
+							class="glyphicon glyphicon-user"></span> Settings </a></li>
+					<li><a href="logout.html"><span
+							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav><br><br><br>
+
+	<main class="productSection" th:if="${product.isPresent()}">
+		<!-- Left Column -->
+		<div class="left-column">
+		<img data-image="red" class="active"
+				th:src="|data:image/jpeg;base64,${product.get().image}|"
+				alt="Image Loading Hindered." style="width:500px;"></img>
+		</div>
+
+
+		<!-- Right Column -->
+		<div class="right-column">
+
+			<!-- Product Description -->
+			<div class="product-description">
+				
+					<span>[[*{product.get().id}]]</span>
+					<h1>[[*{product.get().name}]]</h1>
+					<p>[[*{product.get().desc}]]</p>
+			</div>
+
+			<!-- Product Configuration -->
+			<div class="product-configuration">
+				<div>
+					<span class="quotes">Free Delivery</span><br> <span
+						class="quotes">High Quality HandCrafted Product.</span><br> <span
+						class="quotes">Verified and Trusted Products.</span><br> <span
+						class="quotes">Delivery within 3 business Days.</span>
+					<p class="quotes">Why are you Waiting for ? Grab the Product
+						Now...
+					<p>
+						<br> <a href="#">Know more About this Provider Company
+							and Website</a>
+				</div>
+			</div>
+
+			<!-- Product Pricing -->
+			
+
+			
+			<hr>
+			<div class="product-price">
+				<span>&#8377;[[*{product.get().price}]]</span> <a href="#"
+					class="cart-btn btn">Add to cart</a>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

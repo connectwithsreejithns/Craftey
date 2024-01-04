@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Craftey::Admin</title>
+<!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+<body>
+
+
+
+	<nav class="navbar navbar-expand-sm navbar-light"
+		style="background-color: #e3f2fd;">
+		<ul class="navbar-nav container">
+
+			<li class="nav-item"><a class="nav-link font-weight-bold"
+				href="/admin/home" style="color: black;">Craftey. ADMIN PANEL</a></li>
+			<li class="nav-item"><a class="nav-link font-weight-bold"
+				href="/admin/addProduct">Add Product</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/home">List of
+					Product</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/orders">See
+					Orders</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" href="/admin/orders/orderHistory">Order
+					History</a></li>
+			<li class="list-inline-item"><a
+				class="nav-link font-weight-bold" th:href="@{/user/logout}">Logout</a></li>
+		</ul>
+	</nav>
+	<hr>
+	<h3 class="text-center">Add A Product</h3>
+	<hr>
+	<div class="container">
+		<div class="col-12">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+					<div class="card">
+						<div class="card-body">
+
+							<form action="/admin/productEntry" method="post"
+								enctype="multipart/form-data">
+								<div class="form-group">
+									<!-- Name -->
+									<label for="pname">Add Name</label> <input type="text"
+										name="pname" id="name validationDefault02" class="form-control mb-4"
+										placeholder="Product Name">
+
+									<!-- Price -->
+									<label for="v">Add Price</label> <input type="text"
+										name="price" id="price" class="form-control mb-4"
+										placeholder="Product Price">
+
+									<!-- Description -->
+									<label for="desc">Add Description</label>
+									<textarea class="form-control mb-4" id="desc" name="desc"
+										placeholder="Product Description">
+                                 </textarea>
+									<label for="customFile">Add an image</label>
+									<div class="custom-file mb-4">
+
+										<input type="file" name="file" class="custom-file-input"
+											id="customFile"> <label class="custom-file-label"
+											for="customFile">Product Image</label>
+									</div>
+									<!-- Sign in button -->
+									<button class="btn btn-info btn-block" type="submit">Add
+										the Product</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+</body>
+</html>

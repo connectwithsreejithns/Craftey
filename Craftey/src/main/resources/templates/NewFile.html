@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+			<img
+						th:src="|data:image/jpeg;base64,${product.image}|"
+						style="width: 200px; height: 200px;" />
+			
+			
+			<img
+				class="d-inline align-center"
+				th:src="|data:image/jpeg;base64,${cart.product.image}|" width="18"
+				height="18" alt="Medal icon">&nbsp;&nbsp;
+			
+			
+			<div class="product-price">
+				<span>&#8377;[[*{product.price}]]</span> <a href="#"
+					class="cart-btn">Add to cart</a>
+			</div>
+			
+			
+			<img data-image="red" class="active"
+				th:src="|data:image/jpeg;base64,${product.image}|"
+				alt="Image Loading Hindered."></img>
+</body>
+</html>
+
+<div class="container">
+		<div class="col-12">
+
+
+			<nav class="navbar navbar-expand-sm navbar-light"
+				style="background-color: #e3f2fd;">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link font-weight-bold"
+						href="/admin/addProduct">Add Product</a></li>
+					<li class="list-inline-item"><a
+						class="nav-link font-weight-bold" href="/admin/home">List of
+							Product</a></li>
+					<li class="list-inline-item"><a
+						class="nav-link font-weight-bold" href="/admin/home">See
+							Orders</a></li>
+				</ul>
+			</nav>
+			<hr>
+
+			<div th:each="cart : ${cart}">
+
+				Customer Name : <span style="color: red">[[*{cart.user.username}]]</span><br>
+				Customer Address :<span style="color: red">[[*{cart.user.address.houseName}]]<br>[[*{cart.user.address.street}]]<br>[[*{cart.user.address.city}]]<br>PIN
+					: [[*{cart.user.address.pinCode}]]
+				</span>
+				<hr>
+
+				Customer Phone : <span style="color: red">[[*{cart.user.address.phone}]]</span>
+				<hr>
+				Product Name : <span style="color: red">[[*{cart.product.name}]]</span>
+				X [[*{cart.quantity}]] Piece<br>
+				<hr>
+				Amount : <span style="color: red">[[*{cart.product.price*cart.quantity}]]
+					Rupees</span>
+				<hr>
+				[[*{cart.customerOrder}]]
+				<button type="button" class="btn btn-secondary btn-lg btn-block">Delivered</button>
+				<br>
+				<br>
+				<br>
+			</div>
+
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+				integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+				integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+				crossorigin="anonymous"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+				integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+				crossorigin="anonymous"></script>
+		</div>
+	</div> 
