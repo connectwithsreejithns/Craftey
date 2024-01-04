@@ -1,6 +1,6 @@
 CRAFTEY
 Author : SREEJITH N S
-Contact : connectwithsreejithms@gmail.com
+Contact : connectwithsreejithns@gmail.com
 ------------------------------------------------------------------
 It is a store application to purchase and sell HandiCraft products.
 
