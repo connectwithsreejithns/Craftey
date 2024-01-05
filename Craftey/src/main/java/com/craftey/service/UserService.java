@@ -1,9 +1,9 @@
 package com.craftey.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.craftey.model.Address;
 import com.craftey.model.Role;
 import com.craftey.model.User;
 import com.craftey.repository.UserRepository;
@@ -15,9 +15,13 @@ public class UserService {
 
 	@Autowired
 	private RoleService roleService;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	public User save(User user) {
-		// Perform password hashing, validation, etc., before saving
+		String encodededPassword=passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodededPassword);
 		return userRepository.save(user);
 	}
 
@@ -27,6 +31,9 @@ public class UserService {
 
 	public Role findRoleByName(String name) {
 		return roleService.findByName(name);
+	}
+	public boolean passwordVerification(User user, User userData) {
+		return passwordEncoder.matches(user.getPassword(), userData.getPassword());
 	}
 	
 	

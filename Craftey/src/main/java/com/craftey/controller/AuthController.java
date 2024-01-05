@@ -1,5 +1,7 @@
 package com.craftey.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,22 +35,29 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute("user") User user) {
-		Role userRole = roleService.findByName("ROLE_CUSTOMER");
-		user.setRole(userRole);
-		userService.save(user);
-		return "redirect:/user/login?successMessage=Login now";
-		/* return "user/login"; */
+	public String signup(@ModelAttribute("user") User user, Model model) {
+
+		User existingUser = userService.findByMailUser(user.getEmail());
+		if (existingUser != null) {
+			return "redirect:/user/login?errorMessage=Account exists already, Use another Email id or Login to existing account now...";
+		} else {
+			Role userRole = roleService.findByName("ROLE_CUSTOMER");
+			user.setRole(userRole);
+			userService.save(user);
+			return "redirect:/user/login?successMessage=Login now";
+			/* return "user/login"; */
+		}
 	}
 
 	@GetMapping("/login")
-	public String login(@RequestParam(required = false) String errorMessage,@RequestParam(required = false) String successMessage, Model model) {
+	public String login(@RequestParam(required = false) String errorMessage,
+			@RequestParam(required = false) String successMessage, Model model) {
 		if (errorMessage != null) {
-            model.addAttribute("errorMessage", errorMessage);
-        }
+			model.addAttribute("errorMessage", errorMessage);
+		}
 		if (successMessage != null) {
-            model.addAttribute("successMessage", successMessage);
-        }
+			model.addAttribute("successMessage", successMessage);
+		}
 		model.addAttribute("user", new User());
 		return "user/login";
 	}
@@ -63,8 +72,8 @@ public class AuthController {
 
 		} else {
 
-			if (userdata.getPassword().equals(user.getPassword())) {
-
+			if (userService.passwordVerification(user, userdata)) {
+				
 				HttpSession session = request.getSession();
 				String email = (String) session.getAttribute("eMail");
 				if (email == null) {

@@ -7,13 +7,45 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!--jQuery library-->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<!--Latest compiled and minified JavaScript-->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+/* Styles for the modal */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+/* Style for the close button */
+.close {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	color: #555;
+}
+</style>
+
+
 <link href="/css/productPage.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -32,12 +64,22 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="cart.html"><span
 							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-					<li th:each="user: ${user}">
-					<a th:href="@{/customer/address}"><span
-							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a>
-					</li>
-					<li><a th:href="@{/user/logout}"><span
-							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+					<li th:each="user: ${user}"><a th:href="@{/customer/address}"><span
+							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a></li>
+					<li><a href="#" onclick="toggleModal()"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a> <!-- th:href="@{/user/logout}" -->
+						<!-- Button to trigger the modal --> <!-- <button onclick="toggleModal()">Open Modal</button> -->
+
+						<!-- Modal -->
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<span class="close" onclick="toggleModal()">&times;</span><br>
+								<a href="#" onclick="toggleModal()"><span></span> Continue with craftey.</a><br><br>
+								<p>You are leaving our site ?</p>
+								<a th:href="@{/user/logout}"><span
+									class="glyphicon glyphicon-log-in"></span> Confirm Logout</a>
+							</div>
+						</div></li>
 				</ul>
 			</div>
 		</div>
@@ -45,10 +87,10 @@
 	<div class="container content">
 		<!-- Jumbotron Header -->
 		<div class="jumbotron home-spacer" id="products-jumbotron">
-			<h1>Welcome to the Craftey!</h1>
-			<p>Join a vibrant community of artists, artisans, and craftsmen
-				who appreciate and celebrate the value of handmade creations,
-				fostering connections and collaborations.</p>
+			<h1 style="color: #347474">Welcome to the Craftey!</h1>
+			<p style="color: #0049B7">Join a vibrant community of artists,
+				artisans, and craftsmen who appreciate and celebrate the value of
+				handmade creations, fostering connections and collaborations.</p>
 
 		</div>
 		<hr>
@@ -70,12 +112,12 @@
 						</p>
 						<hr>
 						<div>
-							<a th:href="@{/customer/cart/addToCart/{id}(id=${product.id})}"> 
-								<button class="cart-btn" type="button">Add To
-									Cart</button></a>
-							<a th:href="@{/customer/productView/{id}(id=${product.id})}"> 
-								<button class="cart-btnn" type="submit">Buy Now</button></a>
-						
+							<a th:href="@{/customer/cart/addToCart/{id}(id=${product.id})}">
+								<button class="cart-btn" type="button">Add To Cart</button>
+							</a> <a th:href="@{/customer/productView/{id}(id=${product.id})}">
+								<button class="cart-btnn" type="submit">Buy Now</button>
+							</a>
+
 						</div>
 					</div>
 				</div>
@@ -94,6 +136,13 @@
 			</center>
 		</div>
 	</footer>
+	<script>
+		function toggleModal() {
+			var modal = document.getElementById('myModal');
+			modal.style.display = modal.style.display === 'none' ? 'flex'
+					: 'none';
+		}
+	</script>
 
 </body>
 
