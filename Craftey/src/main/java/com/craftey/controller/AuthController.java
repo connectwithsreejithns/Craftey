@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.craftey.model.Role;
 import com.craftey.model.User;
@@ -36,14 +37,19 @@ public class AuthController {
 		Role userRole = roleService.findByName("ROLE_CUSTOMER");
 		user.setRole(userRole);
 		userService.save(user);
-
-		return "user/login";
+		return "redirect:/user/login?successMessage=Login now";
+		/* return "user/login"; */
 	}
 
 	@GetMapping("/login")
-	public String login(Model model) {
+	public String login(@RequestParam(required = false) String errorMessage,@RequestParam(required = false) String successMessage, Model model) {
+		if (errorMessage != null) {
+            model.addAttribute("errorMessage", errorMessage);
+        }
+		if (successMessage != null) {
+            model.addAttribute("successMessage", successMessage);
+        }
 		model.addAttribute("user", new User());
-
 		return "user/login";
 	}
 
@@ -53,8 +59,7 @@ public class AuthController {
 		User userdata = userService.findByMailUser(user.getEmail());
 
 		if (userdata == null) {
-			System.out.println("User doesn't exists...");
-			return "redirect:/user/login";
+			return "redirect:/user/login?errorMessage=User doesn't exists...";
 
 		} else {
 
@@ -62,34 +67,30 @@ public class AuthController {
 
 				HttpSession session = request.getSession();
 				String email = (String) session.getAttribute("eMail");
-				if(email==null) {
+				if (email == null) {
 					session.setAttribute("eMail", userdata.getEmail());
 				}
-				
+
 				if ((userdata.getRole().getName()).equals("ROLE_CUSTOMER")) {
 
 					return "redirect:/customer/home";
 				} else if (userdata.getRole().getName().equals("ROLE_ADMIN")) {
 					return "redirect:/admin/home";
 				} else {
-					System.out.println("No role Found");
-					return "redirect:/user/login";
+					return "redirect:/user/login?errorMessage=User doesn't exists...";
 				}
 
 			} else {
-				System.out.println("Wrong Password...");
-				return "redirect:/user/login";
+				return "redirect:/user/login?errorMessage=Wrong Password...";
 			}
 		}
 
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-	    session.invalidate();
-	    return "redirect:/user/login";
+		session.invalidate();
+		return "redirect:/user/login";
 	}
-	
-	
 
 }
