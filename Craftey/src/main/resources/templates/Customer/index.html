@@ -64,7 +64,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="cart.html"><span
 							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-					<li th:each="user: ${user}"><a th:href="@{/customer/address}"><span
+					<li th:each="user: ${user}"><a th:href="@{/customer/profile}"><span
 							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a></li>
 					<li><a href="#" onclick="toggleModal()"><span
 							class="glyphicon glyphicon-log-in"></span> Logout</a> <!-- th:href="@{/user/logout}" -->
@@ -74,7 +74,9 @@
 						<div id="myModal" class="modal">
 							<div class="modal-content">
 								<span class="close" onclick="toggleModal()">&times;</span><br>
-								<a href="#" onclick="toggleModal()"><span></span> Continue with craftey.</a><br><br>
+								<a href="#" onclick="toggleModal()"><span></span> Continue
+									with craftey.</a><br>
+								<br>
 								<p>You are leaving our site ?</p>
 								<a th:href="@{/user/logout}"><span
 									class="glyphicon glyphicon-log-in"></span> Confirm Logout</a>
@@ -94,9 +96,17 @@
 
 		</div>
 		<hr>
+		<div th:if="${message}" class="error-message">
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Success!</strong> <span th:text="${message}"></span>
+			</div>
+		</div>
 
-
-		<div class="row text-center" id="cameras">
+		<div class="row text-center">
 			<div th:each="product: ${products}"
 				class="col-md-3 col-sm-6 home-feature">
 				<div class="thumbnail">

@@ -49,7 +49,34 @@ public class AddressController {
 		addressService.saveAddress(addr, user);
 		
 		
-		return "redirect:/customer/home";
+		return "redirect:/customer/home?message=Address set successfully";
+	}
+	
+	@GetMapping("/edit")
+	public String editAddress(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		// Retrieve a session attribute
+		String email = (String) session.getAttribute("eMail");
+		User user = userService.findByMailUser(email);
+		
+		Address addr=addressService.getAddressByUser(user);
+		model.addAttribute("addr", addr);
+		
+		return "Customer/editAddress";
+	}
+	
+	@PostMapping("/update")
+	public String updateAddress(@ModelAttribute("addr") Address addr, HttpServletRequest request ) {
+		HttpSession session = request.getSession();
+		// Retrieve a session attribute
+		String email = (String) session.getAttribute("eMail");
+		User user = userService.findByMailUser(email);
+		Address existingAddr=addressService.getAddressByUser(user);
+		
+		addressService.updateAddress(addr,existingAddr);
+		
+		
+		return "redirect:/customer/profile?message=Address updated";
 	}
 
 }

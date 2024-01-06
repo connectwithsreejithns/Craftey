@@ -40,52 +40,39 @@
 			</div>
 		</div>
 	</nav><br><br><br>
-
-	<main class="productSection" th:if="${product.isPresent()}">
-		<!-- Left Column -->
-		<div class="left-column">
-		<img data-image="red" class="active"
-				th:src="|data:image/jpeg;base64,${product.get().image}|"
-				alt="Image Loading Hindered." style="width:500px;"></img>
-		</div>
-
-
-		<!-- Right Column -->
-		<div class="right-column">
-
-			<!-- Product Description -->
-			<div class="product-description">
-				
-					<!-- <span>[[*{product.get().id}]]</span> -->
-					<h1>[[*{product.get().name}]]</h1>
-					<p>[[*{product.get().desc}]]</p>
-			</div>
-
-			<!-- Product Configuration -->
-			<div class="product-configuration">
-				<div>
-					<span class="quotes">Free Delivery</span><br> <span
-						class="quotes">High Quality HandCrafted Product.</span><br> <span
-						class="quotes">Verified and Trusted Products.</span><br> <span
-						class="quotes">Delivery within 3 business Days.</span>
-					<p class="quotes">Why are you Waiting for ? Grab the Product
-						Now...
-					<p>
-						<br> <!-- <a >Know more About this Provider Company
-							and Website</a> -->
-				</div>
-			</div>
-
-			<!-- Product Pricing -->
-			
-
-			
-			<hr>
-			<div class="product-price">
-				<span>&#8377;[[*{product.get().price}]]</span> <a href="#"
-					class="cart-btn btn">Add to cart</a>
-			</div>
-		</div>
-	</main>
+	<div class="container">
+	<h2>EDIT YOUR ADDRESS</h2><hr>
+	<form action="/customer/address/update" method="post" th:object="${addr}">
+  <div class="form-group">
+    <label for="exampleInputEmail1">House Name</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{houseName}"  placeholder="Enter House name" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Street</label>
+    <input type="text" class="form-control" th:field="*{street}" placeholder="Enter your Street" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">City</label>
+    <input type="text" class="form-control" th:field="*{city}" placeholder="Enter your city" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Pincode</label>
+    <input type="number" class="form-control" th:field="*{pinCode}" placeholder="Enter your Pincode (Only numbers alloted)" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputEmail1">Phone Number</label>
+    <input type="text" class="form-control" th:field="*{phone}" placeholder="Enter your Phone number" required>
+  </div>
+  
+   
+  
+  <hr>
+  <button type="submit" class="btn btn-primary">Update now</button>
+</form>
+</div>
 </body>
 </html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Products | Craftey.</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="/css/productView.css" rel="stylesheet" type="text/css" />
+<link href="/css/buttons.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Craftey.</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/customer/cart}"><span
+							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
+					<li><a href="settings.html"><span
+							class="glyphicon glyphicon-user"></span> Settings </a></li>
+					<li><a href="logout.html"><span
+							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+
+
+
+	<div class="container" th:each="user:${user}">
+		<div th:if="${message}" class="error-message">
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<strong>Success!</strong> <span th:text="${message}"></span>
+			</div>
+		</div>
+		
+		<h2>
+			<span class="glyphicon glyphicon-user"></span>&nbsp; PROFILE
+		</h2>
+		<hr>
+		<div class="card">
+			<div class="card-header" style="color: purple">[[*{user.username}]]</div>
+			<div class="card-body">
+				<h5 class="card-title">[[*{user.email}]]</h5>
+				<hr>
+				<a th:href="@{/customer/editProfile}" class="btn btn-primary">Edit
+					Profile</a>
+			</div>
+		</div>
+		<hr>
+		<div th:if="${user.address == null}">
+			<h2>
+				<span class="glyphicon glyphicon-globe"></span>&nbsp; ADDRESS
+			</h2>
+			<hr>
+			<div class="card">
+				<div class="card-header" style="color: red">Oops !!! You
+					havn't set your address yet.</div>
+				<div class="card-body">
+					<h5 class="card-title">Add your Address and Contact Details
+						now !</h5>
+					<hr>
+					<a th:href="@{/customer/address}" class="btn btn-primary">Add
+						Address and Contact</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div th:if="${user.address != null}">
+
+			<h2>
+				<span class="glyphicon glyphicon-globe"></span>&nbsp; ADDRESS
+			</h2>
+			<hr>
+			<div class="card">
+				<div class="card-header" style="color: purple">
+					<span style="color: red">HOUSE NAME : </span>[[*{user.address.houseName}]]
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">
+						<span style="color: red">STREET : </span>[[*{user.address.street}]]
+					</h5>
+					<h5 class="card-title">
+						<span style="color: red">CITY : </span>[[*{user.address.city}]]
+					</h5>
+					<h5 class="card-title">
+						<span style="color: red">PINCODE : </span>[[*{user.address.pinCode}]]
+					</h5>
+					<h5 class="card-title">
+						<span style="color: red">PHONE : </span>[[*{user.address.phone}]]
+					</h5>
+					<hr>
+					<a th:href="@{/customer/address/edit}" class="btn btn-primary">Edit
+						Address</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

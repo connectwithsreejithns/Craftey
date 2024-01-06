@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.craftey.model.Address;
 import com.craftey.model.Role;
 import com.craftey.model.User;
 import com.craftey.repository.UserRepository;
@@ -35,6 +36,7 @@ public class UserService {
 	public boolean passwordVerification(User user, User userData) {
 		return passwordEncoder.matches(user.getPassword(), userData.getPassword());
 	}
+	
 	
 	
 

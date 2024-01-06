@@ -8,7 +8,6 @@ import com.craftey.model.User;
 import com.craftey.repository.AddressRepository;
 import com.craftey.repository.UserRepository;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -22,6 +21,9 @@ public class AddressService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
 
 
 	public Address saveAddress(Address addr,User user) {
@@ -38,6 +40,19 @@ public class AddressService {
 		userRepository.save(user);
 		return addressRepository.save(address);
 
+	}
+	
+	public Address getAddressByUser(User user) {
+		return user.getAddress();	
+	}
+
+	public Address updateAddress(Address addr, Address existingAddr) {
+		existingAddr.setHouseName(addr.getHouseName());
+		existingAddr.setStreet(addr.getStreet());
+		existingAddr.setCity(addr.getCity());
+		existingAddr.setPinCode(addr.getPinCode());
+		existingAddr.setPhone(addr.getPhone());
+		return addressRepository.save(existingAddr);
 	}
 	
 	

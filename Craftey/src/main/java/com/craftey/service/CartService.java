@@ -72,6 +72,14 @@ public class CartService {
 		
 	}
 	
+	public boolean checkAddrEntry(User user) {
+		
+		if(user.getAddress()==null) {
+			return false;
+		}		
+		return true;		
+	}
+	
 	
 
 }

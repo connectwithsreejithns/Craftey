@@ -41,35 +41,36 @@
 		</div>
 	</nav><br><br><br>
 	<div class="container">
+	<h2>SET YOUR ADDRESS FOR DELIVERY</h2><hr>
 	<form action="/customer/address" method="post" th:object="${addr}">
   <div class="form-group">
     <label for="exampleInputEmail1">House Name</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{houseName}"  placeholder="Enter House name">
+    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{houseName}"  placeholder="Enter House name" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Street</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{street}" placeholder="Enter your Street">
+    <input type="text" class="form-control" th:field="*{street}" placeholder="Enter your Street" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">City</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{city}" placeholder="Enter your city">
+    <input type="text" class="form-control" th:field="*{city}" placeholder="Enter your city" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Pincode</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{pinCode}" placeholder="Enter your Pincode">
+    <input type="number" class="form-control" th:field="*{pinCode}" placeholder="Enter your Pincode (Only numbers alloted)" required>
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail1">Phone Number</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{phone}" placeholder="Enter your Phone number">
+    <input type="text" class="form-control" th:field="*{phone}" placeholder="Enter your Phone number" required>
   </div>
   
    
   
-  
+  <hr>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>

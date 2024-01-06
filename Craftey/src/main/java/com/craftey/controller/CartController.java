@@ -53,6 +53,11 @@ public class CartController {
 		// Retrieve a session attribute
 		String email = (String) session.getAttribute("eMail");
 		User user = userService.findByMailUser(email);
+
+		if (!cartService.checkAddrEntry(user)) {
+			return "redirect:/customer/address";
+		}
+
 		Optional<Product> product = productService.getProduct(id);
 
 		List<Cart> cart = cartService.getCartItems(user.getId(), user);
