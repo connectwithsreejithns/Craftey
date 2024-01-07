@@ -37,6 +37,7 @@ public class CartService {
 		cart.setUser(user);
 		cart.setQuantity(quantity);
 		cart.setProduct(item);
+		cart.setStatus("inCart");
 
 		return cartRepository.save(cart);
 	}
@@ -47,12 +48,19 @@ public class CartService {
 
 	}
 
-	public Cart updateCart(Long id, int num) {
+	public void updateCart(Long id, int num) {
 		Optional<Cart> cart = cartRepository.findById(id);
 		Cart itemCart = cart.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 		int quantity = itemCart.getQuantity();
-		itemCart.setQuantity(quantity + num);
-		return itemCart;
+		if(num==1) {
+			if(quantity!=5) {
+				itemCart.setQuantity(quantity + num);
+			}
+		}else {
+			if(quantity!=1) {
+				itemCart.setQuantity(quantity + num);
+			}
+		}
 	}
 
 	public List<Cart> getCart() {
@@ -78,6 +86,10 @@ public class CartService {
 			return false;
 		}		
 		return true;		
+	}
+
+	public void deleteCart(Optional<Cart> optionalCart) {
+		optionalCart.ifPresent(cart -> cart.setStatus("Cancelled"));
 	}
 	
 	

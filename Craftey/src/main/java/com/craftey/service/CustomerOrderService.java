@@ -29,7 +29,7 @@ public class CustomerOrderService {
 		LocalDate date = LocalDate.now();
 		customerOrder.setCart(cart);
 		customerOrder.setOrderedDate(date);
-
+		
 		return orderRepository.save(customerOrder);
 
 	}

@@ -59,29 +59,57 @@ public class CartController {
 		}
 
 		Optional<Product> product = productService.getProduct(id);
-
 		List<Cart> cart = cartService.getCartItems(user.getId(), user);
 
-		int count = 1;
-		Long cartId = 0L;
-		for (Cart cartItem : cart) {
-			System.out.println(cartItem.getProduct().getId());
-			if (id == cartItem.getProduct().getId()) {
-				count++;
-				cartId = cartItem.getId();
-				break;
-			}
-		}
-		if (count == 1) {
+		if (cart.isEmpty()) {
 			cartService.addToCart(user, product, 1);
 		} else {
-			cartService.updateCart(cartId, 1);
+			int count = 0;
+			for (Cart cartItem : cart) {
+				if (id == cartItem.getProduct().getId()) {
+					if(cartItem.getStatus().equals("inCart")) {
+						count++;
+					}
+				}
+			}
+			if (count == 0) {
+				cartService.addToCart(user, product, 1);
+			}
 		}
-
 		return "redirect:/customer/cart";
-
 	}
 
+	
+	@GetMapping("/addCartItemQuantity/{id}")
+	public String addCartItemQuantity(@PathVariable Long id, Model model) {
+		cartService.updateCart(id, 1);
+		return "redirect:/customer/cart";
+	}
+	
+	@GetMapping("/reduceCartItemQuantity/{id}")
+	public String reduceItemQuantity(@PathVariable Long id, Model model) {
+		cartService.updateCart(id, -1);
+		return "redirect:/customer/cart";
+	}
+	
+	@GetMapping("/deleteCart/{id}")
+	public String deleteCart(@PathVariable Long id, Model model) {
+		
+		cartService.deleteCart(cartService.getCartById(id));
+		return "redirect:/customer/cart";
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/deleteFromCart/{id}")
 	public String deleteFromCart(@PathVariable Long id, Model model, HttpServletRequest request) {
 
@@ -96,7 +124,6 @@ public class CartController {
 		int count = 1;
 		Long cartId = 0L;
 		for (Cart cartItem : cart) {
-			System.out.println(cartItem.getProduct().getId());
 			if (id == cartItem.getProduct().getId()) {
 				count++;
 				cartId = cartItem.getId();

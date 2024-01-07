@@ -62,7 +62,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="cart.html"><span
+					<li><a th:href="@{/customer/cart}"><span
 							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
 					<li th:each="user: ${user}"><a th:href="@{/customer/profile}"><span
 							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a></li>

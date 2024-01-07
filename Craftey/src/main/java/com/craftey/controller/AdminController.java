@@ -22,7 +22,6 @@ public class AdminController {
 	public String seeOrders(Model model) {
 		List<Cart> cart = cartService.getCart();
 		model.addAttribute("cart", cart);
-		System.out.println(cart);
 		return "Admin/seeOrders";
 	}
 	
@@ -31,7 +30,6 @@ public class AdminController {
 	public String seeOrderHistory(Model model) {
 		List<Cart> cart = cartService.getCart();
 		model.addAttribute("cart", cart);
-		System.out.println(cart);
 		return "Admin/orderHistory";
 	}
 }

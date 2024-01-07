@@ -46,8 +46,8 @@ public class CustomerOrderController {
 		for (Cart item : cart) {
 			cartService.setOrderStatus(item);
 		}
-
 		orderService.placeOrder(cart);
+		
 		return "Customer/order";
 	}
 
@@ -59,7 +59,7 @@ public class CustomerOrderController {
 		
 			orderService.setDeliveredStatus(cart);
 		
-			 return "redirect:admin/orders";
+			 return "redirect:/admin/orders";
 		
 	}
 

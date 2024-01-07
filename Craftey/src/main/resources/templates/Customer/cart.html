@@ -57,34 +57,38 @@
 
 					</tr>
 				</thead>
+
 				<tbody th:each="cart:${cart}">
-
-
-					<tr>
+			
+					<tr th:if="${cart.status == 'inCart'}">
 						<td>
 							<div class="product-item">
 								<a class="product-thumb" href="#"><img
 									th:src="|data:image/jpeg;base64,${cart.product.image}|"
 									style="width: 100px;" alt="Product"></a>
 								<div class="product-info">
+								
 									<h4 class="product-title">
-										<a href="#">[[*{cart.product.name}]]</a>
+									<a
+									th:href="@{/customer/cart/deleteCart/{id}(id=${cart.id})}">
+									<button type="button" class="btn btn-outline-success" style="color:red">X</button>
+								</a>
+										[[*{cart.product.name}]]
 									</h4>
 								</div>
 							</div>
 						</td>
 						<td class="text-center">
 							<div class="count-input">
-							
-								<a th:href="@{/customer/cart/deleteFromCart/{id}(id=${cart.product.id})}">
-								<button type="button" class="btn btn-outline-danger">-</button></a>
-								[[*{cart.quantity}]]
-								<a th:href="@{/customer/cart/addToCart/{id}(id=${cart.product.id})}">
-								<button type="button" class="btn btn-outline-success">+</button></a>
-								<!-- <a href="#">-</a>
+
+								<a
+									th:href="@{/customer/cart/reduceCartItemQuantity/{id}(id=${cart.id})}">
+									<button type="button" class="btn btn-outline-danger">-</button>
+								</a> [[*{cart.quantity}]] <a
+									th:href="@{/customer/cart/addCartItemQuantity/{id}(id=${cart.id})}">
+									<button type="button" class="btn btn-outline-success">+</button>
+								</a>
 								
-									<div>[[*{cart.quantity}]]</div>
-									<a href="#">+</a> -->
 							</div>
 						</td>
 						<td class="text-center text-lg text-medium">[[*{cart.product.price}]]</td>
@@ -93,24 +97,21 @@
 							data-toggle="tooltip" title="" data-original-title="Remove item"><i
 								class="fa fa-trash"></i></a></td>
 					</tr>
-
-
-
-
-
-
+					
 				</tbody>
+				
 			</table>
 		</div>
 		<div class="shopping-cart-footer">
-
-			<div class="column text-lg">
-				Subtotal: <span class="text-medium">$289.68</span>
+			<div th:each="cart:${cart}">
+				<div class="column text-lg" th:if="${cart.status == null}">
+					Subtotal: <span class="text-medium">$289.68</span>
+				</div>
 			</div>
 		</div>
 		<div class="shopping-cart-footer">
 			<div class="column">
-				<a class="btn btn-outline-secondary" href=""><i
+				<a class="btn btn-outline-secondary" th:href="@{/customer/home}"><i
 					class="icon-arrow-left"></i>&nbsp;Back to Shopping</a>
 			</div>
 			<div class="column">
