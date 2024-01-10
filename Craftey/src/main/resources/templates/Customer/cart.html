@@ -15,6 +15,38 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link href="/css/cart.css" rel="stylesheet" type="text/css" />
+<style>
+/* Styles for the modal */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-content {
+	background: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+/* Style for the close button */
+.close {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	color: #555;
+}
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -31,10 +63,24 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a th:href="@{/customer/cart}"><span
 							class="glyphicon glyphicon-shopping-cart"></span> Cart </a></li>
-					<li><a href="settings.html"><span
-							class="glyphicon glyphicon-user"></span> Settings </a></li>
-					<li><a href="logout.html"><span
-							class="glyphicon glyphicon-log-in"></span> Logout </a></li>
+					<li th:each="user: ${user}"><a th:href="@{/customer/profile}"><span
+							class="glyphicon glyphicon-user"></span> [[*{user.username}]] </a></li>
+					<li><a href="#" onclick="toggleModal()"><span
+							class="glyphicon glyphicon-log-in"></span> Logout</a> <!-- th:href="@{/user/logout}" -->
+						<!-- Button to trigger the modal --> <!-- <button onclick="toggleModal()">Open Modal</button> -->
+
+						<!-- Modal -->
+						<div id="myModal" class="modal">
+							<div class="modal-content">
+								<span class="close" onclick="toggleModal()">&times;</span><br>
+								<a href="#" onclick="toggleModal()"><span></span> Continue
+									with craftey.</a><br>
+								<br>
+								<p>You are leaving our site ?</p>
+								<a th:href="@{/user/logout}"><span
+									class="glyphicon glyphicon-log-in"></span> Confirm Logout</a>
+							</div>
+						</div></li>
 				</ul>
 			</div>
 		</div>
@@ -103,11 +149,11 @@
 			</table>
 		</div>
 		<div class="shopping-cart-footer">
-			<div th:each="cart:${cart}">
+			<!-- <div th:each="cart:${cart}">
 				<div class="column text-lg" th:if="${cart.status == null}">
 					Subtotal: <span class="text-medium">$289.68</span>
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<div class="shopping-cart-footer">
 			<div class="column">
@@ -123,5 +169,11 @@
 
 
 </body>
-</body>
+<script>
+		function toggleModal() {
+			var modal = document.getElementById('myModal');
+			modal.style.display = modal.style.display === 'none' ? 'flex'
+					: 'none';
+		}
+	</script>
 </html>

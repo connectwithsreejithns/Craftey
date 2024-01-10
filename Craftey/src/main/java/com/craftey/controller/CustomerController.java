@@ -58,9 +58,14 @@ public class CustomerController {
 	}
 
 	@GetMapping("/productView/{id}")
-	public String productView(@PathVariable Long id, Model model) {
+	public String productView(@PathVariable Long id, Model model,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		// Retrieve a session attribute
+		String email = (String) session.getAttribute("eMail");
+		User user = userService.findByMailUser(email);
 		Optional<Product> product = productService.getProduct(id);
 		model.addAttribute("product", product);
+		model.addAttribute("user", user);
 		return "Customer/productView";
 	}
 

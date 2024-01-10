@@ -42,6 +42,7 @@ public class CartController {
 		User user = userService.findByMailUser(email);
 		List<Cart> cart = cartService.getCartItems(user.getId(), user);
 		model.addAttribute("cart", cart);
+		model.addAttribute("user", user);
 		return "Customer/cart";
 
 	}

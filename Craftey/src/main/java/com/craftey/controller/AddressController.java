@@ -30,10 +30,14 @@ public class AddressController {
 	
 	
 	@GetMapping
-	public String addAddress(Model model) {
+	public String addAddress(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		// Retrieve a session attribute
+		String email = (String) session.getAttribute("eMail");
+		User user = userService.findByMailUser(email);
 		Address addr=new Address();
 		model.addAttribute("addr", addr);
-		
+		model.addAttribute("user", user);
 		return "customer/address";
 	}
 
@@ -61,7 +65,7 @@ public class AddressController {
 		
 		Address addr=addressService.getAddressByUser(user);
 		model.addAttribute("addr", addr);
-		
+		model.addAttribute("user", user);
 		return "Customer/editAddress";
 	}
 	

@@ -47,7 +47,7 @@ public class CustomerOrderController {
 			cartService.setOrderStatus(item);
 		}
 		orderService.placeOrder(cart);
-		
+		model.addAttribute("user", user);
 		return "Customer/order";
 	}
 
